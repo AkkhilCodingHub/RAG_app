@@ -13,11 +13,5 @@ A Retrieval-Augmented Generation (RAG) application built with LangChain that enh
 To download and run the installation script:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Akkhil/LangChain/main/install_rag.py | python3
+curl -fsSL https://raw.githubusercontent.com/AkkhilCodingHub/RAG_app/refs/heads/main/install_rag.py | python3
 ```
-
-This script will:
-- Check Python version compatibility
-- Install required dependencies
-- Set up environment configuration
-- Download necessary application files
