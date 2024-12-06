@@ -63,6 +63,18 @@ LLM_API_KEY=your_api_key_here"""
         with open(".env", "w") as f:
             f.write(default_content)
 
+def check_env_file():
+    """Check if .env file has been configured"""
+    if not os.path.exists(".env"):
+        return False
+    
+    with open(".env", "r") as f:
+        content = f.read().strip()
+        
+    # Check if any of the values are still default
+    default_values = ["your_endpoint_url_here", "your_api_key_here"]
+    return not any(value in content for value in default_values)
+
 def download_rag_app():
     """Download the main RAG application"""
     import requests
@@ -96,14 +108,20 @@ def main():
     download_rag_app()
     
     print("\nSetup complete!")
-    print("\nTo use the RAG application:")
-    print(f"1. cd {project_dir}")
-    print("2. Edit .env file with your credentials")
-    if platform.system() != "Windows":
-        print("3. Run: pipenv shell")
-        print("4. Run: python rag_app.py")
+    
+    # Check if .env is configured
+    if not check_env_file():
+        print("\nWARNING: The .env file needs to be configured!")
+        print("Please edit the .env file with your credentials:")
+        print("1. LLM_ENDPOINT_URL - Your LLM API endpoint")
+        print("2. LLM_API_KEY - Your API key for the LLM service")
+        sys.exit(1)
     else:
-        print("3. Run: python rag_app.py")
+        print("\nEnvironment is configured. Starting the RAG application...")
+        if platform.system() != "Windows":
+            subprocess.run(["pipenv", "run", "python", "rag_app.py"])
+        else:
+            subprocess.run([sys.executable, "rag_app.py"])
 
 if __name__ == "__main__":
     main()
