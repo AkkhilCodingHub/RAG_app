@@ -79,16 +79,6 @@ def download_rag_app():
             
     except Exception as e:
         print(f"Failed to download RAG app: {e}")
-    
-    try:
-        response = requests.get(rag_url)
-        response.raise_for_status()
-        
-        with open("rag_app.py", "w") as f:
-            f.write(response.text)
-            
-    except Exception as e:
-        print(f"Failed to download RAG app: {e}")
         sys.exit(1)
 
 def main():

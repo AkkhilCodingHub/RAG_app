@@ -4,6 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+langchain = "*"
+chromadb = "*"
+python-dotenv = "*"
+requests = "*"
+sentence-transformers = "*"
 
 [dev-packages]
 
